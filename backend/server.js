@@ -7,6 +7,7 @@ import productRouter from "./routes/productRoutes.js";
 import userRouter from "./routes/userRoutes.js";
 import orderRouter from "./routes/orderRoutes.js";
 import uploadRouter from "./routes/uploadRoutes.js";
+import morgan from 'morgan';
 
 dotenv.config();
 
@@ -21,8 +22,11 @@ mongoose
 
 const app = express();
 
+app.use(morgan('combined'));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 
 app.get("/api/keys/paypal", (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID || "sb");
